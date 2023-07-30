@@ -14,22 +14,12 @@ export default function Home() {
     e.preventDefault();
     const username = e.currentTarget.username.value;
     const password = e.currentTarget.password.value;
-    // console.log(username, password);
-    // fetch("http://localhost:4000/login", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     email: username,
-    //     password,
-    //   }),
-    //   credentials: "include",
-    // })
+
     authService
       .login(username, password)
       .then((token) => {
         console.log(token);
         if (token) {
-          localStorage.setItem("token", token);
           router.push("/dashboard");
         } else {
           alert("Erro na autenticação");
@@ -37,7 +27,6 @@ export default function Home() {
       })
       .catch((err) => {
         console.log(err);
-        // alert(err);
       });
   };
 
