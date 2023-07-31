@@ -1,0 +1,28 @@
+header{
+    width: 100%;
+}
+
+nav{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding: 0.25rem 2rem;
+    height: var(--navbar-height);
+    background-color: #34435E;
+}
+
+.logo{
+    max-height: 100%;
+    object-fit: contain;
+    width: auto;
+}
+
+.menu{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    color: #ddd;
+    font-size: small;
+}

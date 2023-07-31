@@ -7,6 +7,7 @@ import { authService } from "@/services/authService";
 import { Profile } from "../types/profile";
 
 import "./styles.css";
+import { Navbar } from "@/components/Navbar/Navbar";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -34,7 +35,7 @@ export default function Dashboard() {
             setProfile(profile);
           }
           setIsLoading(false);
-        }, 3000);
+        }, 2500);
       })
       .catch((error) => {
         console.error(error);
@@ -44,7 +45,7 @@ export default function Dashboard() {
 
   if (isIsLoading) {
     return (
-      <main className="main-dashboard">
+      <main className="main-dashboard center">
         <div className="lds-roller">
           <div></div>
           <div></div>
@@ -60,11 +61,11 @@ export default function Dashboard() {
   }
   return (
     <main className="main-dashboard">
+      <Navbar profile={profile} logout={logout} />
       <section>
         <h1>BOM DIA BRASIL</h1>
         {JSON.stringify(profile)}
       </section>
-      <button onClick={logout}>Logout</button>
     </main>
   );
 }
