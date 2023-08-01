@@ -1,0 +1,29 @@
+.hamburger{
+    height: 22px;
+    width: 28px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+.hamburger-line{
+    background-color: #ddd;
+    height: 3px;
+    width: 100%;
+    border-radius: 15px;
+    transform-origin: 14px 0;
+    transition: all 0.5s;
+    opacity: 100%;
+    margin-bottom: 5px;
+}
+
+.hamburger.closed div:nth-child(1){
+    transform: rotate(45deg) translateY(5px) translateX(8px);
+}
+.hamburger.closed div:nth-child(2){
+    opacity: 0;
+}
+.hamburger.closed div:nth-child(3){
+    transform: rotate(-45deg) translateY(-5px) translateX(5px);
+    
+}
