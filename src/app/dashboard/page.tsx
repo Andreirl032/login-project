@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { authService } from "@/services/authService";
@@ -8,10 +8,13 @@ import { Profile } from "../types/profile";
 
 import "./styles.css";
 import { Navbar } from "@/components/Navbar/Navbar";
+import { Sidebar } from "@/components/Sidebar/Sidebar";
+import { SidebarContext } from "../context/SidebarContext";
 
 export default function Dashboard() {
   const router = useRouter();
 
+  const [isOpen, setIsOpen] = useState(false);
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isIsLoading, setIsLoading] = useState(true);
 
@@ -61,11 +64,14 @@ export default function Dashboard() {
   }
   return (
     <main className="main-dashboard">
-      <Navbar profile={profile} logout={logout} />
-      <section>
-        <h1>BOM DIA BRASIL</h1>
-        {JSON.stringify(profile)}
-      </section>
+      <SidebarContext.Provider value={{ isOpen, setIsOpen }}>
+        <Navbar profile={profile} logout={logout} />
+        <Sidebar />
+        <section>
+          <h1>BOM DIA BRASIL</h1>
+          {JSON.stringify(profile)}
+        </section>
+      </SidebarContext.Provider>
     </main>
   );
 }

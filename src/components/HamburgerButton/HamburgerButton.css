@@ -17,13 +17,13 @@
     margin-bottom: 5px;
 }
 
-.hamburger.closed div:nth-child(1){
+.hamburger.open div:nth-child(1){
     transform: rotate(45deg) translateY(5px) translateX(8px);
 }
-.hamburger.closed div:nth-child(2){
+.hamburger.open div:nth-child(2){
     opacity: 0;
 }
-.hamburger.closed div:nth-child(3){
+.hamburger.open div:nth-child(3){
     transform: rotate(-45deg) translateY(-5px) translateX(5px);
     
 }

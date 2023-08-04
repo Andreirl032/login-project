@@ -5,7 +5,8 @@ import "./Navbar.css";
 import Link from "next/link";
 import { Profile } from "@/app/types/profile";
 import HamburgerButton from "../HamburgerButton/HamburgerButton";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { SidebarContext } from "@/app/context/SidebarContext";
 
 interface NavbarProps {
   profile: Profile | null;
@@ -13,7 +14,7 @@ interface NavbarProps {
 }
 
 export const Navbar = ({ profile, logout }: NavbarProps) => {
-  const [isClosed, setIsClosed] = useState(false);
+  const { isOpen, setIsOpen } = useContext(SidebarContext);
   return (
     <header>
       <nav>
@@ -26,8 +27,8 @@ export const Navbar = ({ profile, logout }: NavbarProps) => {
         </ul>
         <HamburgerButton
           className="hamburgerButton"
-          onClick={() => setIsClosed(!isClosed)}
-          isClosed={isClosed}
+          onClick={() => setIsOpen(!isOpen)}
+          isOpen={isOpen}
         />
       </nav>
     </header>
