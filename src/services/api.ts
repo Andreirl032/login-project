@@ -1,4 +1,5 @@
 import axios, { AxiosError } from "axios";
+import { redirect } from "next/navigation";
 
 const url: string = "http://localhost:4000";
 
@@ -56,6 +57,9 @@ api.interceptors.response.use(
           localStorage.setItem("token", token);
           return axios(res);
         }
+        localStorage.removeItem("isAuthenticated");
+        // window.location.href = "/";
+        // redirect("/");
       }
     }
 

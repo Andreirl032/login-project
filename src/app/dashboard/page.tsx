@@ -10,12 +10,15 @@ import "./styles.css";
 import { Navbar } from "@/components/Navbar/Navbar";
 import { Sidebar } from "@/components/Sidebar/Sidebar";
 import { SidebarContext } from "../context/SidebarContext";
+import { AuthContext } from "../context/AuthContext";
+import withAuth from "../context/withAuth";
 
-export default function Dashboard() {
+function Dashboard() {
   const router = useRouter();
 
+  const [userData, setUserData] = useState<Profile | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [profile, setProfile] = useState<Profile | null>(null);
   const [isIsLoading, setIsLoading] = useState(true);
 
   function logout() {
@@ -25,6 +28,7 @@ export default function Dashboard() {
         console.error(err);
       })
       .finally(() => {
+        localStorage.removeItem("isAuthenticated");
         router.replace("/");
       });
   }
@@ -33,15 +37,14 @@ export default function Dashboard() {
     authService
       .getProfile()
       .then((profile) => {
-        setTimeout(() => {
-          if (profile) {
-            setProfile(profile);
-          }
-          setIsLoading(false);
-        }, 2500);
+        if (profile) {
+          setUserData(profile);
+        }
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error(error);
+        localStorage.removeItem("isAuthenticated");
         router.replace("/");
       });
   }, []);
@@ -64,14 +67,20 @@ export default function Dashboard() {
   }
   return (
     <main className="main-dashboard">
-      <SidebarContext.Provider value={{ isOpen, setIsOpen }}>
-        <Navbar profile={profile} logout={logout} />
-        <Sidebar />
-        <section>
-          <h1>BOM DIA BRASIL</h1>
-          {JSON.stringify(profile)}
-        </section>
-      </SidebarContext.Provider>
+      <AuthContext.Provider
+        value={{ isAuthenticated, setIsAuthenticated, userData, setUserData }}
+      >
+        <SidebarContext.Provider value={{ isOpen, setIsOpen }}>
+          <Navbar logout={logout} />
+          <Sidebar />
+          <section>
+            <h1>BOM DIA BRASIL</h1>
+            {JSON.stringify(userData)}
+          </section>
+        </SidebarContext.Provider>
+      </AuthContext.Provider>
     </main>
   );
 }
+
+export default withAuth(Dashboard);

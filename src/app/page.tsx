@@ -18,8 +18,8 @@ export default function Home() {
     authService
       .login(username, password)
       .then((token) => {
-        console.log(token);
         if (token) {
+          localStorage.setItem("isAuthenticated", "true");
           router.push("/dashboard");
         } else {
           alert("Erro na autenticação");
