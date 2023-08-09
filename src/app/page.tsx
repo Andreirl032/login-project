@@ -1,51 +1,86 @@
 "use client";
 
-import { FormEvent } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import { authService } from "@/services/authService";
+import { Profile } from "./types/profile";
 
 import "./styles.css";
+import { Navbar } from "@/components/Navbar/Navbar";
+import { Sidebar } from "@/components/Sidebar/Sidebar";
+import { SidebarContext } from "./context/SidebarContext";
+import { AuthContext } from "./context/AuthContext";
+import withAuth from "./context/withAuth";
 
-export default function Home() {
+function Dashboard() {
   const router = useRouter();
 
-  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const username = e.currentTarget.username.value;
-    const password = e.currentTarget.password.value;
-
+  const [userData, setUserData] = useState<Profile | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isIsLoading, setIsLoading] = useState(true);
+  withAuth;
+  function logout() {
     authService
-      .login(username, password)
-      .then((token) => {
-        if (token) {
-          localStorage.setItem("isAuthenticated", "true");
-          router.push("/dashboard");
-        } else {
-          alert("Erro na autenticação");
-        }
-      })
+      .logout()
       .catch((err) => {
-        console.log(err);
+        console.error(err);
+      })
+      .finally(() => {
+        localStorage.removeItem("isAuthenticated");
+        router.replace("/login");
       });
-  };
+  }
 
+  useEffect(() => {
+    authService
+      .getProfile()
+      .then((profile) => {
+        if (profile) {
+          setUserData(profile);
+        }
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error(error);
+        localStorage.removeItem("isAuthenticated");
+        router.replace("/login");
+      });
+  }, []);
+
+  if (isIsLoading) {
+    return (
+      <main className="main-dashboard center">
+        <div className="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </main>
+    );
+  }
   return (
-    <main className="main">
-      <div className="container">
-        <h1 className="container-title">Login</h1>
-        <form className="form-login" onSubmit={submitHandler}>
-          <label htmlFor="username" className="labeltext">
-            E-mail
-          </label>
-          <input id="username" type="text" placeholder="Username" />
-          <label htmlFor="password" className="labeltext">
-            Senha
-          </label>
-          <input id="password" type="password" placeholder="Password" />
-          <button type="submit">Login</button>
-        </form>
-      </div>
+    <main className="main-dashboard">
+      <AuthContext.Provider
+        value={{ isAuthenticated, setIsAuthenticated, userData, setUserData }}
+      >
+        <SidebarContext.Provider value={{ isOpen, setIsOpen }}>
+          <Navbar logout={logout} />
+          <Sidebar />
+          <section>
+            <h1>BOM DIA BRASIL</h1>
+            {JSON.stringify(userData)}
+          </section>
+        </SidebarContext.Provider>
+      </AuthContext.Provider>
     </main>
   );
 }
+
+export default withAuth(Dashboard);

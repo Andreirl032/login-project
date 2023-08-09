@@ -15,7 +15,7 @@ const withAuth = (Component: FC) => {
       setIsAuthenticated(isAuth);
       if (!isAuth) {
         localStorage.removeItem("isAuthenticated");
-        router.push("/");
+        router.push("/login");
       }
     }, []);
 

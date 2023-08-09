@@ -58,8 +58,8 @@ api.interceptors.response.use(
           return axios(res);
         }
         localStorage.removeItem("isAuthenticated");
-        // window.location.href = "/";
-        // redirect("/");
+        // window.location.href = "/login";
+        // redirect("/login");
       }
     }
 
