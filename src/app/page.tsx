@@ -20,7 +20,7 @@ function Dashboard() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isIsLoading, setIsLoading] = useState(true);
-  withAuth;
+
   function logout() {
     authService
       .logout()
