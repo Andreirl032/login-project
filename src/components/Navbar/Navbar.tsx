@@ -26,7 +26,7 @@ export const Navbar = ({ logout }: NavbarProps) => {
         <ul className="menu">
           <li className="nome">{userData?.name}</li>
           <Link href="/login" onClick={logout} className="btn">
-            Logout
+            Sair
           </Link>
           <Image
             className="profile-picture"

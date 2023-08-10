@@ -17,10 +17,7 @@ import { Spinner } from "@/components/Spinner/Spinner";
 function Dashboard() {
   const router = useRouter();
 
-  const [userData, setUserData] = useState<Profile | null>(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isIsLoading, setIsLoading] = useState(true);
+  const { userData } = useContext(AuthContext);
 
   function logout() {
     authService
@@ -34,43 +31,14 @@ function Dashboard() {
       });
   }
 
-  useEffect(() => {
-    authService
-      .getProfile()
-      .then((profile) => {
-        if (profile) {
-          setUserData(profile);
-        }
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error(error);
-        localStorage.removeItem("isAuthenticated");
-        router.replace("/login");
-      });
-  }, []);
-
-  if (isIsLoading) {
-    return (
-      <main className="main-dashboard center">
-        <Spinner />
-      </main>
-    );
-  }
   return (
     <main className="main-dashboard">
-      <AuthContext.Provider
-        value={{ isAuthenticated, setIsAuthenticated, userData, setUserData }}
-      >
-        <SidebarContext.Provider value={{ isOpen, setIsOpen }}>
-          <Navbar logout={logout} />
-          <Sidebar />
-          <section>
-            <h1>BOM DIA BRASIL</h1>
-            {JSON.stringify(userData)}
-          </section>
-        </SidebarContext.Provider>
-      </AuthContext.Provider>
+      <Navbar logout={logout} />
+      <Sidebar />
+      <section>
+        <h1>BOM DIA BRASIL</h1>
+        {JSON.stringify(userData)}
+      </section>
     </main>
   );
 }

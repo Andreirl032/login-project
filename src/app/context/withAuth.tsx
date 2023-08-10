@@ -1,27 +1,52 @@
-import { FC, useContext, useEffect } from "react";
+"use client";
+
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./AuthContext";
 import { useRouter } from "next/navigation";
+import { authService } from "@/services/authService";
+import { Spinner } from "@/components/Spinner/Spinner";
 
-const withAuth = (Component: FC) => {
-  const Auth: FC = (props) => {
+function withAuth<T>(Component: React.ComponentType<T>) {
+  return (props: T) => {
     const router = useRouter();
-
+    const [isLoading, setIsLoading] = useState(true);
     const { isAuthenticated, setIsAuthenticated, setUserData, userData } =
       useContext(AuthContext);
 
     useEffect(() => {
-      const isAuth = localStorage.getItem("isAuthenticated") === "true";
-      // console.log("IS AUTH", isAuth);
-      setIsAuthenticated(isAuth);
-      if (!isAuth) {
-        localStorage.removeItem("isAuthenticated");
-        router.push("/login");
-      }
+      authService
+        .getProfile()
+        .then((profile) => {
+          if (profile) {
+            setUserData(profile);
+            setIsAuthenticated(true);
+            setIsLoading(false);
+          } else {
+            setIsAuthenticated(false);
+            router.replace("/login");
+            setIsLoading(false);
+          }
+
+          // setIsLoading(false);
+        })
+        .catch((error) => {
+          console.error(error);
+          localStorage.removeItem("isAuthenticated");
+          router.replace("/login");
+          setIsLoading(false);
+        });
     }, []);
 
-    return <Component {...props}></Component>;
+    if (isLoading) {
+      return (
+        <main className="main-dashboard center">
+          <Spinner />
+        </main>
+      );
+    }
+
+    return <Component {...props!} />;
   };
-  return Auth;
-};
+}
 
 export default withAuth;
