@@ -11,7 +11,7 @@ const withAuth = (Component: FC) => {
 
     useEffect(() => {
       const isAuth = localStorage.getItem("isAuthenticated") === "true";
-      console.log("IS AUTH", isAuth);
+      // console.log("IS AUTH", isAuth);
       setIsAuthenticated(isAuth);
       if (!isAuth) {
         localStorage.removeItem("isAuthenticated");

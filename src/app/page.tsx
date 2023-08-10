@@ -12,6 +12,7 @@ import { Sidebar } from "@/components/Sidebar/Sidebar";
 import { SidebarContext } from "./context/SidebarContext";
 import { AuthContext } from "./context/AuthContext";
 import withAuth from "./context/withAuth";
+import { Spinner } from "@/components/Spinner/Spinner";
 
 function Dashboard() {
   const router = useRouter();
@@ -52,16 +53,7 @@ function Dashboard() {
   if (isIsLoading) {
     return (
       <main className="main-dashboard center">
-        <div className="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+        <Spinner />
       </main>
     );
   }

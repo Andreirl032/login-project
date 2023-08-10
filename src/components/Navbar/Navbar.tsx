@@ -1,5 +1,4 @@
 import Image from "next/image";
-import logo from "../../../public/assets/images/logo.png";
 
 import "./Navbar.css";
 import Link from "next/link";
@@ -8,6 +7,9 @@ import HamburgerButton from "../HamburgerButton/HamburgerButton";
 import { useContext, useState } from "react";
 import { SidebarContext } from "@/app/context/SidebarContext";
 import { AuthContext } from "@/app/context/AuthContext";
+
+import logo from "../../../public/assets/images/logo.png";
+import no_profile_picture from "../../../public/assets/images/no-profile-picture.png";
 
 interface NavbarProps {
   logout: () => void;
@@ -26,6 +28,13 @@ export const Navbar = ({ logout }: NavbarProps) => {
           <Link href="/login" onClick={logout} className="btn">
             Logout
           </Link>
+          <Image
+            className="profile-picture"
+            src={!userData?.photo ? no_profile_picture : userData.photo}
+            alt="foto de perfil do usuário"
+            width={40}
+            height={40}
+          />
         </ul>
         <HamburgerButton
           className="hamburgerButton"
