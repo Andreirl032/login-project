@@ -38,6 +38,11 @@ nav{
     object-fit: contain;
     width: auto;
     border-radius: 5rem;
+    cursor: pointer;
+}
+
+.profile{
+    position: relative;
 }
 
 @media screen and (min-width:768px) {

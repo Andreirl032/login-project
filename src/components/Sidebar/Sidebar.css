@@ -5,7 +5,7 @@
     top: var(--navbar-height);
     right: 0;
     transition: all 0.3s;
-    background-color: rgb(111, 67, 200);
+    background-color: #4F86C6;
     height: 100vh;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 }
@@ -16,9 +16,9 @@
 }
 
 .sidebar-elements{
-    padding: 1.5rem 4rem;
+    padding: 1.5rem 2.5rem;
     list-style-type: none;
-    background-color: rgb(111, 67, 200);
+    background-color: #4F86C6;
     border-bottom: 2px solid black;
 }
 

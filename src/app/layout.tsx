@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { Profile } from "./types/profile";
 import { AuthContext } from "./context/AuthContext";
 import { SidebarContext } from "./context/SidebarContext";
+import { NavbarPopUpContext } from "./context/NavbarPopUpContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +23,7 @@ export default function RootLayout({
   const [userData, setUserData] = useState<Profile | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isNavbarPopUpOpen, setIsNavbarPopUpOpen] = useState(false);
 
   return (
     <html lang="en">
@@ -30,7 +32,11 @@ export default function RootLayout({
           value={{ isAuthenticated, setIsAuthenticated, userData, setUserData }}
         >
           <SidebarContext.Provider value={{ isOpen, setIsOpen }}>
-            {children}
+            <NavbarPopUpContext.Provider
+              value={{ isNavbarPopUpOpen, setIsNavbarPopUpOpen }}
+            >
+              {children}
+            </NavbarPopUpContext.Provider>
           </SidebarContext.Provider>
         </AuthContext.Provider>
       </body>

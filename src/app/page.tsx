@@ -33,7 +33,7 @@ function Dashboard() {
 
   return (
     <main className="main-dashboard">
-      <Navbar logout={logout} />
+      <Navbar />
       <Sidebar />
       <section>
         <h1>BOM DIA BRASIL</h1>
