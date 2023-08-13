@@ -5,21 +5,32 @@
     top: var(--navbar-height);
     right: 0;
     transition: all 0.3s;
-    background-color: #4F86C6;
+    background-color: #ddd;
     height: 100vh;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    font-family:Arial, Helvetica, sans-serif;
+    gap: 1rem;
 }
 
 .sidebar.closed{
-    /* display: none; */
     right: -75%;
 }
 
+.first-sidebar-element{
+    padding: 1.5rem 2.5rem;
+    list-style-type: none;
+    white-space: pre-wrap;
+    display: flex;
+    justify-content: space-between;
+}
 .sidebar-elements{
     padding: 1.5rem 2.5rem;
     list-style-type: none;
-    background-color: #4F86C6;
-    border-bottom: 2px solid black;
+    white-space: pre-wrap;
+    border-radius:1rem;
+}
+.sidebar-elements:hover{
+    background-color: rgba(79,134,198, 0.2);
 }
 
 @media screen and (min-width:768px){

@@ -5,62 +5,47 @@
     align-items: center;
     position: absolute;
     right: -1rem;
-    top: 5rem;
+    top: 4rem;
     transition: all 0.2s;
+    background-color: #ddd;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 5px 15px;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-.pop-up-triangle{
-    position: absolute;
-    right: 0.5rem;
-    top: -1.5rem;
-    width: 0; 
-      height: 0; 
-      border-left: 1.7rem solid transparent;
-      border-right: 1.7rem solid transparent;
-      
-      border-bottom: 1.7rem solid #ddd;
-}
-
-.line-1{
-    width: 2.2rem;
-    background-color: black;
-    height: 1px;
-    rotate: 135deg;
-    transform-origin: left;
-    border-radius: 1rem;
-    position: absolute;
-    top: -1px;
-}
-.line-2{
-    width: 2.2rem;
-    background-color: black;
-    height: 1px;
-    rotate: 45deg;
-    transform-origin: left;
-    position: absolute;
-    left: 0px;
-    top: -1px;
-    border-radius: 1rem;
-}
-
-.pop-up-box{
+.pop-up-first-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     color: black;
     background-color: #ddd;
     padding: 1rem;
-    border: solid black 1px;
+    border: solid #bbb 1px;
     gap: 1rem;
-    width: 15rem; 
-    /* position: absolute; */
-    /* top: 0rem; */
+    width: 15rem;
     line-break: anywhere;
-    white-space: normal;
+    white-space: pre-wrap;
 }
 
-.display-none{
-    /* display: none; */
+.pop-up-boxes{
+    color: rgb(30, 48, 80);
+    font-weight: bold;
+    background-color: #ddd;
+    padding: 1rem;
+    border: solid #bbb 1px;
+    gap: 1rem;
+    width: 15rem;
+    line-break: anywhere;
+    white-space: pre-wrap;
+}
+
+.pop-up-boxes:hover{
+    background-color: rgba(79,134,198, 0.2);
+}
+
+.no-display{
     opacity: 0;
     pointer-events: none;
-    transition: all 0.2s;
+    transition: all 0.3s;
 }
 
 @media screen and (max-width:768px){
