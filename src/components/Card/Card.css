@@ -1,0 +1,51 @@
+.card{
+    background-color: #fff;
+    box-shadow: 0 0 1.25rem rgba(0,0,0,0.15);
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 0.9em;
+    padding: 2.3rem 5rem 2.3rem 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    border: solid transparent 2px;
+    transition: all 0.4s;
+    display: flex;
+}
+
+.card:hover{
+    transition: all 0.4s;
+    background-color: #F6F8FC;
+    border: solid #0052af 2px;
+}
+
+.title-and-location{
+    flex-direction: column;
+    padding-left: 2rem;
+}
+
+.card-title{
+    max-height: 2rem;
+}
+
+.location{
+    font-weight: 200;
+    color: gray;
+    max-height: 1rem;
+    padding-top: 0.5rem;
+}
+
+.location-dot{
+    padding-right: 0.5rem;
+}
+
+.stars{
+    margin-left: 1rem;
+    font-size: 1.2rem;
+}
+
+.picture{
+    max-width: 12.5rem;
+    max-height: 12.5rem;
+    border-radius: 0.5rem;
+    object-fit: contain;
+}

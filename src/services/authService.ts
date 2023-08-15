@@ -23,4 +23,11 @@ export const authService = {
     const { data } = response.data;
     return data as Profile | null;
   },
+  getAirbnbData: async (page: number, size: number): Promise<string[]> => {
+    const response = await api.get("/api/v1/data", {
+      params: { page: page, size: size },
+    });
+    const { data } = response.data;
+    return data;
+  },
 };
