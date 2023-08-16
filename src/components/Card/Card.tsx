@@ -12,7 +12,7 @@ interface CardProps {
 
 export const Card = (props: CardProps) => {
   const data = props.airbnbData;
-  console.log(props.star_value);
+
   return (
     <div>
       <div className="card">
@@ -30,15 +30,52 @@ export const Card = (props: CardProps) => {
             height={200}
           ></Image>
         )}
-        <div className="title-and-location">
-          <h1 className="card-title">{data.name}</h1>
-          <h4 className="location">
-            <i className="fa-solid fa-location-dot location-dot"></i>
-            {data.address.street}
-          </h4>
-        </div>
-        <div className="stars">
-          <Stars star_value={props.star_value} />
+        <div className="card-elements">
+          <div className="text-and-stars">
+            <div className="title-and-location">
+              <h1 className="card-title">{data.name}</h1>
+              <h4 className="location">
+                <i className="fa-solid fa-location-dot location-dot"></i>
+                {data.address.street}
+              </h4>
+            </div>
+            <div className="stars">
+              <Stars star_value={props.star_value} />
+            </div>
+          </div>
+
+          <div className="airbnb-info">
+            <div className="info">
+              <div className="info-symbol">
+                <i className="fa-solid fa-sack-dollar" />
+              </div>
+              <div className="info-text">
+                <div className="info-title">Preço</div>
+                USD {data.price}/dia
+              </div>
+            </div>
+
+            <div className="info">
+              <div className="info-symbol">
+                <i className="fa-solid fa-person info-symbol" />
+              </div>
+              <div className="info-text">
+                <div className="info-title">Quantos acomoda:</div>
+                {data.accommodates}{" "}
+                {data.accommodates > 1 ? "pessoas" : "pessoa"}
+              </div>
+            </div>
+
+            <div className="info">
+              <div className="info-symbol">
+                <i className="fa-solid fa-clock" />
+              </div>
+              <div className="info-text">
+                <div className="info-title">Quantas noites:</div>
+                {data.minimum_nights} - {data.maximum_nights} noites
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

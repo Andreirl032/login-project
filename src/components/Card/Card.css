@@ -2,7 +2,7 @@
     background-color: #fff;
     box-shadow: 0 0 1.25rem rgba(0,0,0,0.15);
     font-family:Arial, Helvetica, sans-serif;
-    font-size: 0.9em;
+    font-size: 0.8em;
     padding: 2.3rem 5rem 2.3rem 2rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
@@ -18,9 +18,20 @@
     border: solid #0052af 2px;
 }
 
-.title-and-location{
+.card-elements{
+    display: flex;
     flex-direction: column;
     padding-left: 2rem;
+}
+
+.text-and-stars{
+    display: flex;
+    flex-direction: row;
+}
+
+.title-and-location{
+    flex-direction: column;
+    height:fit-content;
 }
 
 .card-title{
@@ -38,9 +49,50 @@
     padding-right: 0.5rem;
 }
 
+.airbnb-info{
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    flex: 1;
+    align-items: end;
+    color: gray;
+}
+
+
+.info{
+    margin-right: 1.5rem;
+    font-weight:bold;
+    color:#5F6372;
+    display: flex;
+    flex-direction: row;
+}
+
+.info-text{
+    display: flex;
+    flex:5;
+    flex-direction: column;
+    font-size: 1rem;
+}
+
+.info-title{
+    color: #A3A5B7;
+    margin-bottom: 0.5rem;
+    font-size: 0.7rem;
+}
+
+.info-symbol{
+    font-size: 1.5rem;
+    padding-right: 0.5rem;
+    color: #A3A5B7;
+    display: flex;
+    flex:1;
+    align-items: center;
+}
+
 .stars{
     margin-left: 1rem;
     font-size: 1.2rem;
+    height:fit-content;
 }
 
 .picture{
