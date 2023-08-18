@@ -15,23 +15,13 @@ import "./styles.css";
 function Dashboard() {
   const router = useRouter();
 
-  const [starValues, setStarValues] = useState<number[]>([]);
-
-  const { userData } = useContext(AuthContext);
-
   const [currentData, setCurrentData] = useState<any[]>([]);
+
   useEffect(() => {
     authService.getAirbnbData(1, 10).then((res: any[]) => {
       setCurrentData(res);
     });
   }, []);
-  useEffect(() => {
-    const randomStarValues = [];
-    for (var i = 0; i < currentData.length; i++) {
-      randomStarValues.push(~~(Math.random() * 6));
-    }
-    setStarValues(randomStarValues);
-  }, [currentData]);
 
   function logout() {
     authService
@@ -53,7 +43,7 @@ function Dashboard() {
         <div>
           <h1 className="title">Lista de Airbnb: página 1</h1>
           {currentData.map((data, index) => {
-            return <Card airbnbData={data} star_value={starValues[index]} />;
+            return <Card airbnbData={data} />;
           })}
         </div>
       </section>

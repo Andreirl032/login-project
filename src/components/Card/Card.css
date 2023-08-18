@@ -10,12 +10,7 @@
     border: solid transparent 2px;
     transition: all 0.4s;
     display: flex;
-}
-
-.card:hover{
-    transition: all 0.4s;
-    background-color: #F6F8FC;
-    border: solid #0052af 2px;
+    min-height: 12.5rem;
 }
 
 .card-elements{
@@ -36,6 +31,15 @@
 
 .card-title{
     max-height: 2rem;
+}
+
+.property{
+    font-weight: 600;
+    padding-top: 0.5rem;
+}
+
+.dot{
+    margin: 0 0.5rem;
 }
 
 .location{
@@ -89,10 +93,20 @@
     align-items: center;
 }
 
-.stars{
+.star-and-rating{
     margin-left: 1rem;
     font-size: 1.2rem;
     height:fit-content;
+}
+
+.gold-star{
+    color: gold;
+    margin-right: 0.2rem;
+}
+
+.empty-star{
+    color: #A3A5B7;
+    margin-right: 0.2rem;
 }
 
 .picture{

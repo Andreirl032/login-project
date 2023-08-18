@@ -1,13 +1,13 @@
 import Image from "next/image";
 
-import { Stars } from "../Stars/Stars";
+import { generatePropertySymbolType } from "./GeneratePropertySymbolType";
+
 import image_not_found from "../../../public/assets/images/image-not-found.jpg";
 
 import "./Card.css";
 
 interface CardProps {
   airbnbData: any;
-  star_value: any;
 }
 
 export const Card = (props: CardProps) => {
@@ -34,13 +34,28 @@ export const Card = (props: CardProps) => {
           <div className="text-and-stars">
             <div className="title-and-location">
               <h1 className="card-title">{data.name}</h1>
+              <h4 className="property">
+                {generatePropertySymbolType(data.property_type ?? "")}{" "}
+                {data.property_type}
+                <span className="dot"> • </span>
+                {data.room_type}
+              </h4>
               <h4 className="location">
                 <i className="fa-solid fa-location-dot location-dot"></i>
                 {data.address.street}
               </h4>
             </div>
-            <div className="stars">
-              <Stars star_value={props.star_value} />
+            <div className="star-and-rating">
+              <i
+                className={
+                  !data.review_scores.review_scores_rating
+                    ? "fa-regular fa-star empty-star"
+                    : "fa-solid fa-star gold-star"
+                }
+              />
+              {!data.review_scores.review_scores_rating
+                ? "Sem avaliações"
+                : data.review_scores.review_scores_rating / 20}
             </div>
           </div>
 
